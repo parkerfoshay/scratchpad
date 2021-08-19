@@ -6,13 +6,13 @@ workbox.routing.registerRoute(
     cacheName: "currencies",
     plugins: [
       new workbox.expiration.Plugin({
-        maxAgeSeconds: 10 * 60 // 10 minutes
-      })
-    ]
+        maxAgeSeconds: 10 * 60, // 10 minutes
+      }),
+    ],
   })
 );
 
-addEventListener("message", event => {
+addEventListener("message", (event) => {
   if (event.data && event.data.type === "SKIP_WAITING") {
     skipWaiting();
   }
