@@ -1,15 +1,19 @@
 import { Workbox } from 'workbox-window';
+import {Editor} from './editor';
 
 const main = document.querySelector('#main');
 
 main.innerHTML = '';
 
 try {
-  CodeMirror(main, {
-    lineNumbers: true,
-    tabSize: 2,
-    value: 'console.log("Hello, World");',
-  });
+  const editor = new Editor(main)
+
+  console.log(editor);
+
+  editor.setText('console.log("Hello, World");')
+  /* editor.on('change', (editor) => {
+    editor.onUpdate()
+  }); */
 } catch (err) {
   console.error(err);
   main.innerHTML = `<div class="loading-container">
