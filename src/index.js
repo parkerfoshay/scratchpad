@@ -1,19 +1,26 @@
 import { Workbox } from 'workbox-window';
-import {Editor} from './editor';
+import { openDB } from 'idb';
+import { Editor } from './editor';
+import './css/styles.css';
 
 const main = document.querySelector('#main');
 
 main.innerHTML = '';
 
 try {
-  const editor = new Editor(main)
+  openDB('settings-store', 1, {
+    upgrade(db) {
+      db.createObjectStore('settings');
+    },
+  })
+  const editor = new Editor(main);
 
   console.log(editor);
 
-  editor.setText('console.log("Hello, World");')
-  /* editor.on('change', (editor) => {
-    editor.onUpdate()
-  }); */
+  editor.setText('console.log("Hello, World");');
+  editor.editor.on('change', async (editor) => {
+   // Add the DB logic
+  });
 } catch (err) {
   console.error(err);
   main.innerHTML = `<div class="loading-container">

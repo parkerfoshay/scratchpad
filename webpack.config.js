@@ -9,6 +9,7 @@ module.exports = (env) => {
     mode: 'development',
     entry: {
       main: './src/index.js',
+      editor: './src/editor.js',
     },
     output: {
       filename: '[name].bundle.js',
@@ -26,7 +27,10 @@ module.exports = (env) => {
     ],
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
         {
           test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
@@ -34,7 +38,7 @@ module.exports = (env) => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },

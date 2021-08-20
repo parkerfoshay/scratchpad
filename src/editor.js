@@ -11,8 +11,11 @@ export class Editor {
   setText(text) {
       this.editor.doc.setValue(text);
   }
+
   onUpdate() {
     const text = this.editor.doc.getValue();
     console.log(text);
   }
+
+
 }
